@@ -7,7 +7,7 @@ export default function Home() {
       {/* Hero Section */}
       <HeroSection name={"sda-academy"} name2={"name2"}/>
 
-      {/* About Section */}
+      {/*   About Section     */}
       <section className="py-16 px-6 max-w-6xl mx-auto">
         <h2 className="text-3xl font-semibold text-center mb-8">Why Choose Shaurya Defence Academy?</h2>
         <div className="grid md:grid-cols-2 gap-8">
