@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import PlaceholderImage from '@/components/common/PlaceholderImage'
+import ImagePlaceholder from '@/components/ui/ImagePlaceholder'
 
 interface CourseCardProps {
   id: string
@@ -34,13 +34,7 @@ export default function CourseCard({
       className="flex flex-col overflow-hidden rounded-lg shadow-lg bg-white hover:shadow-xl transition-shadow duration-300"
     >
       <div className="flex-shrink-0 relative">
-        <PlaceholderImage
-          src={image}
-          alt={title}
-          width={500}
-          height={300}
-          className="h-56 w-full object-cover"
-        />
+        <ImagePlaceholder className="h-56 w-full" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
       </div>
       <div className="flex flex-1 flex-col justify-between p-8">

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CourseCard from "@/components/courses/CourseCard";
-import PlaceholderImage from "@/components/common/PlaceholderImage";
+import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 import { featuredCourses } from "@/data/courses";
 
 const staggerContainer = {
@@ -76,13 +76,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="px-6 pt-6 pb-14">
-                        <PlaceholderImage
-                          src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                          alt="Surya Defence Academy Campus"
-                          width={1000}
-                          height={600}
-                          className="rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10"
-                        />
+                        <ImagePlaceholder className="h-[600px] w-full rounded-md" />
                       </div>
                     </div>
                   </div>
@@ -118,7 +112,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             {featuredCourses.map((course) => (
-              <CourseCard key={course.id} {...course} />
+              <CourseCard key={course.id.toString()} {...course} id={course.id.toString()} />
             ))}
           </motion.div>
         </div>
