@@ -3,15 +3,11 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import ImagePlaceholder from '@/components/ui/ImagePlaceholder'
+import { Course } from '../../types/academy'
 
 interface CourseCardProps {
+  course: Course
   id: string
-  title: string
-  description: string
-  image: string
-  href: string
-  duration?: string
-  level?: string
 }
 
 const fadeInUp = {
@@ -20,14 +16,7 @@ const fadeInUp = {
   transition: { duration: 0.5 }
 }
 
-export default function CourseCard({
-  title,
-  description,
-  image,
-  href,
-  duration,
-  level
-}: CourseCardProps) {
+export default function CourseCard({ course, id }: CourseCardProps) {
   return (
     <motion.article
       variants={fadeInUp}
@@ -39,36 +28,32 @@ export default function CourseCard({
       </div>
       <div className="flex flex-1 flex-col justify-between p-8">
         <div className="flex-1">
-          <Link href={href} className="block">
+          <Link href={`/courses/${id}`} className="block">
             <h3 className="text-xl font-bold text-secondary-900 mb-4 hover:text-primary-600 transition-colors duration-200">
-              {title}
+              {course.title}
             </h3>
             <p className="text-base text-secondary-800 leading-relaxed">
-              {description}
+              {course.description}
             </p>
           </Link>
         </div>
         <div className="mt-8 flex items-center justify-between border-t border-secondary-100 pt-6">
           <div className="flex items-center space-x-6 text-sm">
-            {duration && (
-              <span className="flex items-center text-secondary-800">
-                <svg className="h-5 w-5 text-primary-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {duration}
-              </span>
-            )}
-            {level && (
-              <span className="flex items-center text-secondary-800">
-                <svg className="h-5 w-5 text-primary-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-                {level}
-              </span>
-            )}
+            <span className="flex items-center text-secondary-800">
+              <svg className="h-5 w-5 text-primary-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {course.examPattern.duration}
+            </span>
+            <span className="flex items-center text-secondary-800">
+              <svg className="h-5 w-5 text-primary-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              {course.examPattern.mode}
+            </span>
           </div>
           <Link
-            href={href}
+            href={`/courses/${id}`}
             className="inline-flex items-center text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors duration-200"
           >
             Learn more

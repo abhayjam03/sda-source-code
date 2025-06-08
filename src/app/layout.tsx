@@ -1,24 +1,18 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import ErrorBoundary from "@/components/error/ErrorBoundary";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import ErrorBoundaryClient from "../components/error/ErrorBoundaryClient";
 
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-});
-
-const poppins = Poppins({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-poppins",
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Surya Defence Academy",
-  description: "Premier Defence Coaching Institute in Pathankot, Punjab for NDA, CDS, SSB, AFCAT, and more.",
+  title: "Surya Defence Academy - Pathankot",
+  description: "Premier defence coaching institute in Pathankot for NDA, CDS, SSB, AFCAT, and more.",
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
@@ -27,11 +21,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
-      <body className="min-h-screen bg-white font-sans antialiased">
-        <ErrorBoundary>
+    <html lang="en">
+      <body className={inter.className}>
+        <Navbar />
+        <ErrorBoundaryClient>
           {children}
-        </ErrorBoundary>
+        </ErrorBoundaryClient>
+        <Footer />
       </body>
     </html>
   );

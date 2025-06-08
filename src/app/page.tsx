@@ -2,91 +2,59 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import CourseCard from "@/components/courses/CourseCard";
+import { useEffect, useState } from 'react';
+import CourseCard from '@/components/courses/CourseCard';
 import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
-import { featuredCourses } from "@/data/courses";
+import { featuredCourses, allCourses } from "@/data/courses";
+import Hero from '@/components/Hero';
+import { getHeroSection, getFeatures, getTestimonials } from '@/services/academyService';
 
-const staggerContainer = {
-  animate: {
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
     transition: {
       staggerChildren: 0.1
     }
   }
 };
 
-export default function Home() {
-  return (
-    <div className="min-h-screen">
-      <Navbar />
-      
-      {/* Hero Section */}
-      <div className="relative isolate overflow-hidden bg-gradient-to-b from-primary-100/20">
-        <div className="mx-auto max-w-7xl pb-24 pt-10 sm:pb-32 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:px-8 lg:py-40">
-          <motion.div 
-            className="px-6 lg:px-0 lg:pt-4"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="mx-auto max-w-2xl">
-              <div className="max-w-lg">
-                <h1 className="mt-10 text-4xl font-bold tracking-tight text-secondary-900 sm:text-6xl">
-                  Shape Your Future in Defence Forces
-                </h1>
-                <p className="mt-6 text-lg leading-8 text-secondary-600">
-                  Join Pathankot's premier defence coaching institute for NDA, CDS, SSB, AFCAT, and more. Expert guidance, comprehensive study material, and proven success rate.
-                </p>
-                <div className="mt-10 flex items-center gap-x-6">
-                  <Link
-                    href="/courses"
-                    className="btn btn-primary px-6 py-3"
-                  >
-                    Explore Courses
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="text-sm font-semibold leading-6 text-secondary-900 hover:text-primary-600 transition-colors duration-200"
-                  >
-                    Contact Us <span aria-hidden="true">→</span>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-          <motion.div 
-            className="mt-20 sm:mt-24 md:mx-auto md:max-w-2xl lg:mx-0 lg:mt-0 lg:w-screen"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <div className="absolute inset-y-0 right-1/2 -z-10 -mr-10 w-[200%] skew-x-[-30deg] bg-white shadow-xl shadow-primary-600/10 ring-1 ring-primary-50 md:-mr-20 lg:-mr-36" />
-            <div className="shadow-lg md:rounded-3xl">
-              <div className="bg-primary-500 [clip-path:inset(0)] md:[clip-path:inset(0_round_theme(borderRadius.3xl))]">
-                <div className="absolute -inset-y-px left-1/2 -z-10 ml-10 w-[200%] skew-x-[-30deg] bg-primary-100 opacity-20 ring-1 ring-inset ring-white md:ml-20 lg:ml-36" />
-                <div className="relative px-6 pt-8 sm:pt-16 md:pl-16 md:pr-0">
-                  <div className="mx-auto max-w-2xl md:mx-0 md:max-w-none">
-                    <div className="w-screen overflow-hidden rounded-tl-xl bg-secondary-900">
-                      <div className="flex bg-secondary-800/40 ring-1 ring-white/5">
-                        <div className="-mb-px flex text-sm font-medium leading-6 text-secondary-400">
-                          <div className="border-b border-r border-b-white/20 border-r-white/10 bg-white/5 px-4 py-2 text-white">
-                            Our Campus
-                          </div>
-                        </div>
-                      </div>
-                      <div className="px-6 pt-6 pb-14">
-                        <ImagePlaceholder className="h-[600px] w-full rounded-md" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
 
+export default function Home() {
+  const [hasMounted, setHasMounted] = useState(false);
+  const [heroData, setHeroData] = useState<any>(null);
+  const [features, setFeatures] = useState<any[]>([]);
+  const [testimonials, setTestimonials] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [hero, feat, test] = await Promise.all([
+          getHeroSection(),
+          getFeatures(),
+          getTestimonials()
+        ]);
+        setHeroData(hero);
+        setFeatures(feat);
+        setTestimonials(test);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) return null;
+
+  return (
+    <main className="min-h-screen bg-gray-50">
+      {heroData && <Hero data={heroData} />}
+      
       {/* Featured Courses */}
       <div className="bg-white py-24 sm:py-32">
         <div className="container">
@@ -106,21 +74,102 @@ export default function Home() {
           </motion.div>
           <motion.div 
             className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3"
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="animate"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
           >
-            {featuredCourses.map((course) => (
-              <CourseCard key={course.id.toString()} {...course} id={course.id.toString()} />
-            ))}
+            {featuredCourses?.map((course) => {
+              if (!course?.title) return null;
+              return (
+                <motion.div
+                  key={course.title}
+                  variants={itemVariants}
+                >
+                  <CourseCard 
+                    course={course} 
+                    id={course.title.toLowerCase().replace(/\s+/g, '-')} 
+                  />
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </div>
 
-      <Footer />
-    </div>
+      {/* Courses Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="mb-12 text-center text-4xl font-bold text-gray-900">
+            All Courses
+          </h2>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {allCourses?.map((course) => {
+              if (!course?.title) return null;
+              return (
+                <CourseCard 
+                  key={course.title} 
+                  course={course} 
+                  id={course.title.toLowerCase().replace(/\s+/g, '-')} 
+                />
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <div className="bg-white py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">Why Choose Us</h2>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {features?.map((feature) => {
+              if (!feature?.title) return null;
+              return (
+                <div key={feature.title} className="rounded-lg bg-gray-50 p-6 text-center">
+                  <h3 className="mb-2 text-xl font-bold text-gray-900">{feature.title}</h3>
+                  <p className="text-gray-700">{feature.description}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Testimonials Section */}
+      <div className="bg-gray-50 py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">What Our Students Say</h2>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {testimonials?.map((testimonial) => {
+              if (!testimonial?.name) return null;
+              return (
+                <div key={testimonial.name} className="rounded-lg bg-white p-6 shadow-lg">
+                  <p className="mb-4 text-gray-700">{testimonial.content}</p>
+                  <p className="font-bold text-gray-900">{testimonial.name}</p>
+                  <p className="text-gray-600">{testimonial.role}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Contact Section */}
+      <section className="bg-gray-900 py-16 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="mb-8 text-4xl font-bold">Contact Us</h2>
+          <p className="mb-8 text-xl">
+            Ready to start your journey? Get in touch with us today!
+          </p>
+          <a
+            href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE}`}
+            className="inline-block rounded-full bg-red-600 px-8 py-3 text-lg font-semibold transition-colors hover:bg-red-700"
+          >
+            Call Now
+          </a>
+        </div>
+      </section>
+    </main>
   );
 }
-
-

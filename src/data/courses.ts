@@ -1,90 +1,160 @@
-export interface Course {
-  id: number
-  title: string
-  description: string
-  image: string
-  href: string
-  duration?: string
-  level?: string
-}
+import { Course } from '../types/academy';
 
 export const featuredCourses: Course[] = [
   {
-    id: 1,
     title: 'NDA Foundation',
     description: 'Comprehensive preparation for NDA entrance examination with expert guidance.',
-    image: '/courses/nda-foundation.jpg',
-    href: '/courses/nda-foundation',
+    examPattern: {
+      mode: 'Online',
+      duration: '12 months',
+      totalQuestions: 150,
+      totalMarks: 300,
+      subjects: {
+        'Mathematics': 100,
+        'General Ability': 200
+      },
+      markingScheme: '+2 for correct, -0.66 for incorrect',
+      passingMarks: 180
+    }
   },
   {
-    id: 2,
     title: 'CDS/OTA',
     description: 'Specialized coaching for Combined Defence Services and Officer Training Academy.',
-    image: '/courses/cds.jpg',
-    href: '/courses/cds',
+    examPattern: {
+      mode: 'Online',
+      duration: '6 months',
+      totalQuestions: 120,
+      totalMarks: 300,
+      subjects: {
+        'English': 100,
+        'General Knowledge': 100,
+        'Elementary Mathematics': 100
+      },
+      markingScheme: '+2.5 for correct, -0.83 for incorrect',
+      passingMarks: 150
+    }
   },
   {
-    id: 3,
     title: 'AFCAT',
     description: 'Air Force Common Admission Test preparation with experienced faculty.',
-    image: '/courses/afcat.jpg',
-    href: '/courses/afcat',
-  },
-]
+    examPattern: {
+      mode: 'Online',
+      duration: '4 months',
+      totalQuestions: 100,
+      totalMarks: 300,
+      subjects: {
+        'General Awareness': 100,
+        'Verbal Ability': 100,
+        'Numerical Ability': 100
+      },
+      markingScheme: '+3 for correct, -1 for incorrect',
+      passingMarks: 150
+    }
+  }
+];
 
 export const allCourses: Course[] = [
   {
-    id: 1,
     title: 'NDA Foundation',
     description: 'Comprehensive preparation for NDA entrance examination with expert guidance.',
-    image: '/courses/nda-foundation.jpg',
-    href: '/courses/nda-foundation',
-    duration: '12 months',
-    level: 'Beginner',
+    examPattern: {
+      mode: 'Online',
+      duration: '12 months',
+      totalQuestions: 150,
+      totalMarks: 300,
+      subjects: {
+        'Mathematics': 100,
+        'General Ability': 200
+      },
+      markingScheme: '+2 for correct, -0.66 for incorrect',
+      passingMarks: 180
+    }
   },
   {
-    id: 2,
     title: 'CDS/OTA',
     description: 'Specialized coaching for Combined Defence Services and Officer Training Academy.',
-    image: '/courses/cds.jpg',
-    href: '/courses/cds',
-    duration: '6 months',
-    level: 'Intermediate',
+    examPattern: {
+      mode: 'Online',
+      duration: '6 months',
+      totalQuestions: 120,
+      totalMarks: 300,
+      subjects: {
+        'English': 100,
+        'General Knowledge': 100,
+        'Elementary Mathematics': 100
+      },
+      markingScheme: '+2.5 for correct, -0.83 for incorrect',
+      passingMarks: 150
+    }
   },
   {
-    id: 3,
     title: 'AFCAT',
     description: 'Air Force Common Admission Test preparation with experienced faculty.',
-    image: '/courses/afcat.jpg',
-    href: '/courses/afcat',
-    duration: '4 months',
-    level: 'Intermediate',
+    examPattern: {
+      mode: 'Online',
+      duration: '4 months',
+      totalQuestions: 100,
+      totalMarks: 300,
+      subjects: {
+        'General Awareness': 100,
+        'Verbal Ability': 100,
+        'Numerical Ability': 100
+      },
+      markingScheme: '+3 for correct, -1 for incorrect',
+      passingMarks: 150
+    }
   },
   {
-    id: 4,
     title: 'SSB Interview',
     description: 'Comprehensive training for SSB interview with mock sessions and feedback.',
-    image: '/courses/ssb.jpg',
-    href: '/courses/ssb',
-    duration: '2 months',
-    level: 'Advanced',
+    examPattern: {
+      mode: 'Offline',
+      duration: '2 months',
+      totalQuestions: 0,
+      totalMarks: 0,
+      subjects: {
+        'Psychology': 0,
+        'GTO Tasks': 0,
+        'Personal Interview': 0
+      },
+      markingScheme: 'Qualitative Assessment',
+      passingMarks: 'Recommended'
+    }
   },
   {
-    id: 5,
     title: 'CAPF',
     description: 'Preparation for Central Armed Police Forces examination.',
-    image: '/courses/capf.jpg',
-    href: '/courses/capf',
-    duration: '6 months',
-    level: 'Intermediate',
+    examPattern: {
+      mode: 'Online',
+      duration: '6 months',
+      totalQuestions: 125,
+      totalMarks: 250,
+      subjects: {
+        'General Intelligence': 50,
+        'General Studies': 50,
+        'Elementary Mathematics': 50,
+        'English': 50
+      },
+      markingScheme: '+2 for correct, -0.66 for incorrect',
+      passingMarks: 125
+    }
   },
   {
-    id: 6,
     title: 'MNS',
     description: 'Military Nursing Service examination preparation.',
-    image: '/courses/mns.jpg',
-    href: '/courses/mns',
-    duration: '4 months',
-    level: 'Intermediate',
-  },
-] 
+    examPattern: {
+      mode: 'Online',
+      duration: '4 months',
+      totalQuestions: 150,
+      totalMarks: 300,
+      subjects: {
+        'General English': 100,
+        'Biology': 100,
+        'Physics': 50,
+        'Chemistry': 50
+      },
+      markingScheme: '+2 for correct, -0.66 for incorrect',
+      passingMarks: 150
+    }
+  }
+]; 

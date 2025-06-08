@@ -1,8 +1,7 @@
 'use client'
 
-import Image from 'next/image'
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
+import { useEffect, useState } from 'react';
+import { getAcademyInfo } from '@/services/academyService';
 
 const features = [
   {
@@ -29,108 +28,80 @@ const features = [
     name: 'Library Facility',
     description: 'Well-equipped library with extensive collection of books and resources for self-study.',
   },
-]
+];
 
 const stats = [
   { id: 1, name: 'Students Trained', value: '10,000+' },
   { id: 2, name: 'Success Rate', value: '60%+' },
   { id: 3, name: 'Years of Experience', value: '15+' },
   { id: 4, name: 'Expert Faculty', value: '25+' },
-]
+];
 
 export default function AboutPage() {
+  const [hasMounted, setHasMounted] = useState(false);
+  const [academyInfo, setAcademyInfo] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const info = await getAcademyInfo();
+        setAcademyInfo(info);
+      } catch (error) {
+        console.error('Error fetching academy info:', error);
+      }
+    };
+    fetchData();
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted || !academyInfo) return null;
+
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      
-      <main className="bg-white">
-        {/* Header */}
-        <div className="relative isolate overflow-hidden bg-gradient-to-b from-primary-100/20 pt-14">
-          <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
-            <div className="mx-auto max-w-2xl text-center">
-              <h1 className="text-4xl font-bold tracking-tight text-secondary-900 sm:text-6xl">
-                About Us
-              </h1>
-              <p className="mt-6 text-lg leading-8 text-secondary-600">
-                Premier Defence Coaching Institute committed to shaping the future of defence aspirants through quality education and training.
-              </p>
-            </div>
-          </div>
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <div className="bg-red-600 py-16 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="mb-4 text-4xl font-bold md:text-5xl">About Us</h1>
+          <p className="mx-auto max-w-2xl text-lg">Learn more about our academy and our commitment to excellence in defence coaching.</p>
         </div>
+      </div>
 
-        {/* Stats */}
-        <div className="bg-white py-24 sm:py-32">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <dl className="grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-4">
-              {stats.map((stat) => (
-                <div key={stat.id} className="mx-auto flex max-w-xs flex-col gap-y-4">
-                  <dt className="text-base leading-7 text-secondary-600">{stat.name}</dt>
-                  <dd className="order-first text-3xl font-semibold tracking-tight text-secondary-900 sm:text-5xl">
-                    {stat.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
+      {/* Overview Section */}
+      <div className="container mx-auto px-4 py-16">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="mb-6 text-lg text-gray-700">{academyInfo.overview}</p>
+          <p className="text-lg text-gray-700">
+            Contact us at: <a href={`tel:${academyInfo.contact}`} className="text-red-600 hover:underline">{academyInfo.contact}</a>
+          </p>
         </div>
+      </div>
 
-        {/* Features */}
-        <div className="bg-white py-24 sm:py-32">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl lg:text-center">
-              <h2 className="text-base font-semibold leading-7 text-primary-600">Why Choose Us</h2>
-              <p className="mt-2 text-3xl font-bold tracking-tight text-secondary-900 sm:text-4xl">
-                Everything you need to succeed
-              </p>
-              <p className="mt-6 text-lg leading-8 text-secondary-600">
-                We provide comprehensive training and support to help you achieve your dream of joining the defence forces.
-              </p>
-            </div>
-            <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-              <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
-                {features.map((feature) => (
-                  <div key={feature.name} className="flex flex-col">
-                    <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-secondary-900">
-                      {feature.name}
-                    </dt>
-                    <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-secondary-600">
-                      <p className="flex-auto">{feature.description}</p>
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          </div>
-        </div>
-
-        {/* Mission and Vision */}
-        <div className="bg-secondary-50 py-24 sm:py-32">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl lg:mx-0">
-              <h2 className="text-3xl font-bold tracking-tight text-secondary-900 sm:text-4xl">Our Mission & Vision</h2>
-              <p className="mt-6 text-lg leading-8 text-secondary-600">
-                We are dedicated to empowering aspiring candidates to achieve their dreams of joining the armed forces. Our state-of-the-art facilities and nurturing learning environment ensure accessibility and success for all.
-              </p>
-            </div>
-            <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:mt-10 lg:max-w-none lg:grid-cols-2">
-              <div>
-                <h3 className="text-2xl font-bold tracking-tight text-secondary-900">Our Mission</h3>
-                <p className="mt-6 text-lg leading-8 text-secondary-600">
-                  To provide quality education and training to defence aspirants, preparing them for successful careers in the armed forces through comprehensive coaching and personal development.
-                </p>
+      {/* Stats Section */}
+      <div className="bg-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+            {stats.map((stat) => (
+              <div key={stat.id} className="text-center">
+                <p className="text-3xl font-bold text-red-600">{stat.value}</p>
+                <p className="mt-2 text-gray-600">{stat.name}</p>
               </div>
-              <div>
-                <h3 className="text-2xl font-bold tracking-tight text-secondary-900">Our Vision</h3>
-                <p className="mt-6 text-lg leading-8 text-secondary-600">
-                  To be the leading defence coaching institute in India, known for excellence in training and producing successful defence officers who serve the nation with pride and honor.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
-      </main>
+      </div>
 
-      <Footer />
+      {/* Features Section */}
+      <div className="container mx-auto px-4 py-16">
+        <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">Our Features</h2>
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {features.map((feature) => (
+            <div key={feature.name} className="rounded-lg bg-white p-6 shadow-lg">
+              <h3 className="mb-2 text-xl font-bold text-gray-900">{feature.name}</h3>
+              <p className="text-gray-700">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
-  )
+  );
 } 

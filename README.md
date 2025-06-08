@@ -1,81 +1,70 @@
 # Surya Defence Academy Website
 
-A modern, responsive website for Surya Defence Academy, a premier defence coaching institute in Pathankot, Punjab.
+A modern, responsive website for Surya Defence Academy built with Next.js, TypeScript, and Tailwind CSS.
 
 ## Features
 
-- Fully responsive design
-- Modern UI with smooth animations using Framer Motion
-- Server-side rendering with Next.js
-- Optimized performance
-- SEO friendly
-- Accessible components
-- Interactive elements with smooth transitions
+- 🎨 Modern and responsive design
+- ⚡ Fast page loads with Next.js
+- 📱 Mobile-first approach
+- 🎯 SEO optimized
+- 🔍 TypeScript for better development experience
+- 💅 Tailwind CSS for styling
+- 📸 Optimized images with Next.js Image component
+- 🔄 Server-side rendering for better performance
 
-## Pages
+## Prerequisites
 
-- Home
-- About
-- Courses
-  - NDA Foundation
-  - CDS
-  - AFCAT
-  - SSB Interview
-- Contact
-
-## Tech Stack
-
-- Next.js 15
-- React 19
-- Tailwind CSS 4
-- Framer Motion
-- Heroicons
-- TypeScript
+- Node.js 18.x or later
+- npm or yarn
 
 ## Getting Started
 
 1. Clone the repository:
 ```bash
-git clone [repository-url]
+git clone https://github.com/yourusername/surya-defence-academy.git
+cd surya-defence-academy
 ```
 
 2. Install dependencies:
 ```bash
 npm install
+# or
+yarn install
 ```
 
-3. Run the development server:
+3. Create a `.env.local` file in the root directory and add the following environment variables:
+```env
+NEXT_PUBLIC_CONTACT_PHONE=7355666622
+```
+
+4. Start the development server:
 ```bash
 npm run dev
+# or
+yarn dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
 ## Project Structure
 
 ```
 src/
-├── app/                 # Next.js app directory
-│   ├── about/          # About page
-│   ├── courses/        # Course pages
-│   ├── contact/        # Contact page
-│   └── page.tsx        # Home page
-├── components/         # Reusable components
-│   └── layout/        # Layout components
-│       ├── Navbar.tsx # Navigation component
-│       └── Footer.tsx # Footer component
-└── styles/            # Global styles
-    └── globals.css    # Global CSS file
+├── app/              # Next.js app directory
+├── components/       # Reusable components
+├── services/        # API and data services
+├── types/           # TypeScript type definitions
+└── utils/           # Utility functions
 ```
 
-## Features
+## Available Scripts
 
-- **Modern Design**: Clean and professional design with smooth animations
-- **Responsive Layout**: Fully responsive design that works on all devices
-- **Performance Optimized**: Fast loading times and smooth interactions
-- **SEO Friendly**: Built with SEO best practices in mind
-- **Accessible**: Follows accessibility guidelines
-- **Interactive**: Smooth animations and transitions using Framer Motion
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run type-check` - Run TypeScript type checking
 
 ## Contributing
 
@@ -87,4 +76,10 @@ src/
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any queries, please contact:
+- Phone: 7355666622
+- Email: info@suryadefenceacademy.com
