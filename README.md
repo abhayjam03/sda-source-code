@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Surya Defence Academy Website
+
+A modern, responsive website for Surya Defence Academy, a premier defence coaching institute in Pathankot, Punjab.
+
+## Features
+
+- Fully responsive design
+- Modern UI with smooth animations using Framer Motion
+- Server-side rendering with Next.js
+- Optimized performance
+- SEO friendly
+- Accessible components
+- Interactive elements with smooth transitions
+
+## Pages
+
+- Home
+- About
+- Courses
+  - NDA Foundation
+  - CDS
+  - AFCAT
+  - SSB Interview
+- Contact
+
+## Tech Stack
+
+- Next.js 15
+- React 19
+- Tailwind CSS 4
+- Framer Motion
+- Heroicons
+- TypeScript
 
 ## Getting Started
 
-First, run the development server:
-
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [repository-url]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Run the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/                 # Next.js app directory
+│   ├── about/          # About page
+│   ├── courses/        # Course pages
+│   ├── contact/        # Contact page
+│   └── page.tsx        # Home page
+├── components/         # Reusable components
+│   └── layout/        # Layout components
+│       ├── Navbar.tsx # Navigation component
+│       └── Footer.tsx # Footer component
+└── styles/            # Global styles
+    └── globals.css    # Global CSS file
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Modern Design**: Clean and professional design with smooth animations
+- **Responsive Layout**: Fully responsive design that works on all devices
+- **Performance Optimized**: Fast loading times and smooth interactions
+- **SEO Friendly**: Built with SEO best practices in mind
+- **Accessible**: Follows accessibility guidelines
+- **Interactive**: Smooth animations and transitions using Framer Motion
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
