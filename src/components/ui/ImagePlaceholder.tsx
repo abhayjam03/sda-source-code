@@ -11,10 +11,10 @@ export default function ImagePlaceholder({ className = '' }: ImagePlaceholderPro
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className={`bg-secondary-100 ${className}`}
+      className={`bg-gray-100 ${className}`}
     >
       <svg
-        className="w-full h-full text-secondary-300"
+        className="w-full h-full text-gray-400"
         viewBox="0 0 400 300"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

@@ -80,10 +80,10 @@ export default function NDAFoundationPage() {
         <div className="relative isolate overflow-hidden bg-gradient-to-b from-primary-100/20 pt-14">
           <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
-              <h1 className="text-4xl font-bold tracking-tight text-secondary-900 sm:text-6xl">
+              <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
                 NDA Foundation Course
               </h1>
-              <p className="mt-6 text-lg leading-8 text-secondary-600">
+              <p className="mt-6 text-lg leading-8 text-gray-800">
                 Comprehensive preparation program for NDA entrance examination with expert guidance and proven success rate.
               </p>
             </div>
@@ -94,18 +94,18 @@ export default function NDAFoundationPage() {
         <div className="bg-white py-24 sm:py-32">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl lg:mx-0">
-              <h2 className="text-3xl font-bold tracking-tight text-secondary-900 sm:text-4xl">Course Overview</h2>
-              <p className="mt-6 text-lg leading-8 text-secondary-600">
+              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Course Overview</h2>
+              <p className="mt-6 text-lg leading-8 text-gray-800">
                 Our NDA Foundation Course is designed to provide comprehensive preparation for the National Defence Academy entrance examination. The course covers all aspects of the examination, including written test preparation, physical training, and personality development.
               </p>
             </div>
             <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:mt-10 lg:max-w-none lg:grid-cols-3">
               {features.map((feature) => (
                 <div key={feature.name} className="flex flex-col">
-                  <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-secondary-900">
+                  <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
                     {feature.name}
                   </dt>
-                  <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-secondary-600">
+                  <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-800">
                     <p className="flex-auto">{feature.description}</p>
                   </dd>
                 </div>
@@ -118,22 +118,22 @@ export default function NDAFoundationPage() {
         <div className="bg-secondary-50 py-24 sm:py-32">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl lg:mx-0">
-              <h2 className="text-3xl font-bold tracking-tight text-secondary-900 sm:text-4xl">Course Curriculum</h2>
-              <p className="mt-6 text-lg leading-8 text-secondary-600">
+              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Course Curriculum</h2>
+              <p className="mt-6 text-lg leading-8 text-gray-800">
                 Our curriculum is designed to cover all aspects of the NDA examination, ensuring comprehensive preparation for success.
               </p>
             </div>
             <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:mt-10 lg:max-w-none lg:grid-cols-3">
               {curriculum.map((section) => (
                 <div key={section.title} className="flex flex-col">
-                  <h3 className="text-xl font-semibold leading-7 text-secondary-900">{section.title}</h3>
+                  <h3 className="text-xl font-semibold leading-7 text-gray-900">{section.title}</h3>
                   <ul role="list" className="mt-6 space-y-3">
                     {section.topics.map((topic) => (
                       <li key={topic} className="flex gap-x-3">
-                        <svg className="h-6 w-5 flex-none text-primary-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                           <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
                         </svg>
-                        <span className="text-sm leading-6 text-secondary-600">{topic}</span>
+                        <span className="text-sm leading-6 text-gray-800">{topic}</span>
                       </li>
                     ))}
                   </ul>
@@ -147,8 +147,8 @@ export default function NDAFoundationPage() {
         <div className="bg-white py-24 sm:py-32">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-secondary-900 sm:text-4xl">Ready to Start Your Journey?</h2>
-              <p className="mt-6 text-lg leading-8 text-secondary-600">
+              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Ready to Start Your Journey?</h2>
+              <p className="mt-6 text-lg leading-8 text-gray-800">
                 Join our NDA Foundation Course and take the first step towards your dream of serving the nation.
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
@@ -160,7 +160,7 @@ export default function NDAFoundationPage() {
                 </Link>
                 <Link
                   href="/courses"
-                  className="text-sm font-semibold leading-6 text-secondary-900"
+                  className="text-sm font-semibold leading-6 text-gray-900"
                 >
                   View Other Courses <span aria-hidden="true">→</span>
                 </Link>

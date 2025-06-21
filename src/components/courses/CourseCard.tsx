@@ -29,10 +29,10 @@ export default function CourseCard({ course, id }: CourseCardProps) {
       <div className="flex flex-1 flex-col justify-between p-8">
         <div className="flex-1">
           <Link href={`/courses/${id}`} className="block">
-            <h3 className="text-xl font-bold text-secondary-900 mb-4 hover:text-primary-600 transition-colors duration-200">
+            <h3 className="text-xl font-bold text-gray-900 mb-4 hover:text-indigo-600 transition-colors duration-200">
               {course.title}
             </h3>
-            <p className="text-base text-secondary-800 leading-relaxed">
+            <p className="text-base text-gray-800 leading-relaxed">
               {course.description}
             </p>
           </Link>

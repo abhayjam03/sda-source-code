@@ -57,7 +57,7 @@ export default function Home() {
       
       {/* Featured Courses */}
       <div className="bg-white py-24 sm:py-32">
-        <div className="container">
+        <div className="container mx-auto px-4">
           <motion.div 
             className="mx-auto max-w-2xl text-center"
             initial={{ opacity: 0, y: 20 }}
@@ -65,10 +65,10 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl font-bold tracking-tight text-secondary-900 sm:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               Our Featured Courses
             </h2>
-            <p className="mt-2 text-lg leading-8 text-secondary-600">
+            <p className="mt-2 text-lg leading-8 text-gray-800">
               Comprehensive preparation programs designed to help you succeed in defence examinations.
             </p>
           </motion.div>

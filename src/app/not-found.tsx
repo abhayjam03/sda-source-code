@@ -2,10 +2,11 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { Suspense } from 'react'
 
-export default function NotFound() {
+function NotFoundContent() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary-50 to-white flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-50 flex items-center justify-center p-4">
       <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl p-8">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
@@ -18,10 +19,10 @@ export default function NotFound() {
             animate={{ y: 0 }}
             transition={{ type: "spring", stiffness: 100 }}
           >
-            <h1 className="text-4xl font-bold text-secondary-900 mb-4">
+            <h1 className="text-4xl font-bold text-indigo-900 mb-4">
               404 - Page Not Found
             </h1>
-            <p className="text-secondary-600 mb-8">
+            <p className="text-gray-800 mb-8">
               The page you're looking for seems to have gone on a secret mission.
             </p>
           </motion.div>
@@ -36,7 +37,7 @@ export default function NotFound() {
               viewBox="0 0 100 100"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="w-full h-full text-primary-500"
+              className="w-full h-full text-indigo-500"
             >
               <path
                 d="M50 0C22.4 0 0 22.4 0 50s22.4 50 50 50 50-22.4 50-50S77.6 0 50 0zm0 90c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40z"
@@ -52,13 +53,13 @@ export default function NotFound() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/"
-              className="btn btn-primary px-6 py-3"
+              className="btn bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg transition-colors"
             >
               Return Home
             </Link>
             <Link
               href="/courses"
-              className="btn btn-secondary px-6 py-3"
+              className="btn bg-gray-100 hover:bg-gray-200 text-gray-800 px-6 py-3 rounded-lg transition-colors"
             >
               Explore Courses
             </Link>
@@ -66,5 +67,26 @@ export default function NotFound() {
         </motion.div>
       </div>
     </div>
+  )
+}
+
+export default function NotFound() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-50 flex items-center justify-center p-4">
+        <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl p-8">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold text-indigo-900 mb-4">
+              404 - Page Not Found
+            </h1>
+            <p className="text-gray-800 mb-8">
+              The page you're looking for seems to have gone on a secret mission.
+            </p>
+          </div>
+        </div>
+      </div>
+    }>
+      <NotFoundContent />
+    </Suspense>
   )
 } 

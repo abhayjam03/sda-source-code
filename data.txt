@@ -217,3 +217,139 @@ Class 9 Exam Pattern:
   - General Science (25 questions, 50 marks)
   - Social Studies (25 questions, 50 marks)
 - Marking Scheme: No negative marking
+
+// Collection: academy
+{
+  _id: ObjectId,
+  name: "Surya Defence Academy",
+  location: "Pathankot",
+  contact: "7355666622",
+  overview: "Surya Defence Academy, located in Pathankot...",
+  features: [
+    "Expert coaching for Army",
+    "Agniveer GD / CLERK / TECHNICAL / TRADESMAN",
+    "Nursing Assistant",
+    "SSC (GD)",
+    "CRPF, CISF, BSF, ITBP",
+    "All state police forces",
+    "Sanik / Military school"
+  ],
+  specialConcessions: [
+    "Children of Veer Naries",
+    "Ex-servicemen",
+    "Financial support for needy"
+  ],
+  lastUpdated: ISODate,
+  updatedBy: ObjectId // Reference to users collection
+}
+
+// Collection: courses
+{
+  _id: ObjectId,
+  name: String, // e.g., "Agniveer GD", "SSC (GD)", etc.
+  type: String, // e.g., "Army", "Paramilitary", "Police", "School"
+  description: String,
+  examPattern: {
+    mode: String,
+    duration: Number,
+    totalQuestions: Number,
+    totalMarks: Number,
+    subjects: [{
+      name: String,
+      questions: Number,
+      marks: Number
+    }],
+    markingScheme: {
+      correct: Number,
+      incorrect: Number
+    },
+    passingMarks: Number
+  },
+  eligibility: {
+    education: String,
+    age: {
+      min: Number,
+      max: Number
+    },
+    physicalRequirements: [String]
+  },
+  lastUpdated: ISODate,
+  updatedBy: ObjectId
+}
+
+// Collection: forces
+{
+  _id: ObjectId,
+  name: String, // e.g., "CRPF", "CISF", "BSF", "ITBP"
+  type: String, // e.g., "Paramilitary", "Police", "Army"
+  established: Number,
+  description: String,
+  responsibilities: [String],
+  examPattern: {
+    mode: String,
+    duration: Number,
+    totalQuestions: Number,
+    totalMarks: Number,
+    subjects: [{
+      name: String,
+      questions: Number
+    }],
+    markingScheme: {
+      correct: Number,
+      incorrect: Number
+    }
+  },
+  lastUpdated: ISODate,
+  updatedBy: ObjectId
+}
+
+// Collection: schools
+{
+  _id: ObjectId,
+  name: String, // e.g., "Sainik School"
+  type: String, // e.g., "Military School"
+  description: String,
+  examPatterns: [{
+    class: Number, // e.g., 6 or 9
+    mode: String,
+    duration: Number,
+    totalQuestions: Number,
+    totalMarks: Number,
+    subjects: [{
+      name: String,
+      questions: Number,
+      marks: Number
+    }],
+    markingScheme: {
+      correct: Number,
+      incorrect: Number
+    }
+  }],
+  lastUpdated: ISODate,
+  updatedBy: ObjectId
+}
+
+// Collection: users
+{
+  _id: ObjectId,
+  username: String,
+  email: String,
+  role: String, // "admin", "editor"
+  permissions: [String],
+  lastLogin: ISODate,
+  createdAt: ISODate
+}
+
+// Collection: contentHistory
+{
+  _id: ObjectId,
+  collectionName: String,
+  documentId: ObjectId,
+  changes: [{
+    field: String,
+    oldValue: Mixed,
+    newValue: Mixed,
+    timestamp: ISODate,
+    changedBy: ObjectId
+  }]
+}
