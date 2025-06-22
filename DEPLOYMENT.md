@@ -82,9 +82,9 @@ This guide will help you deploy your Surya Defence Academy application to Vercel
 3. **Environment Variables**
    Create `.env.local` file:
    ```env
-   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/surya-defence-academy?retryWrites=true&w=majority
+   NEXT_PUBLIC_MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/surya-defence-academy?retryWrites=true&w=majority
    JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
-   NEXTAUTH_URL=http://localhost:3000
+   NEXT_PUBLIC_NEXTAUTH_URL=http://localhost:3000
    NEXTAUTH_SECRET=your-nextauth-secret-key
    ```
 
@@ -119,7 +119,7 @@ This guide will help you deploy your Surya Defence Academy application to Vercel
    ```bash
    vercel env add MONGODB_URI
    vercel env add JWT_SECRET
-   vercel env add NEXTAUTH_URL
+   vercel env add NEXT_PUBLIC_NEXTAUTH_URL
    vercel env add NEXTAUTH_SECRET
    ```
 
@@ -132,9 +132,9 @@ This guide will help you deploy your Surya Defence Academy application to Vercel
 
 ### Required Variables
 ```env
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/surya-defence-academy?retryWrites=true&w=majority
+NEXT_PUBLIC_MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/surya-defence-academy?retryWrites=true&w=majority
 JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
-NEXTAUTH_URL=https://your-app.vercel.app
+NEXT_PUBLIC_NEXTAUTH_URL=https://your-app.vercel.app
 NEXTAUTH_SECRET=your-nextauth-secret-key
 ```
 

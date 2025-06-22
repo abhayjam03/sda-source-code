@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "init-user": "node src/scripts/initMasterUser.js",
+    "populate-db": "node src/scripts/populateDatabase.js",
     "setup": "node setup.js"
   },
   "dependencies": {
