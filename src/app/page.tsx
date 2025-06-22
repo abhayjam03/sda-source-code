@@ -1,61 +1,175 @@
-import Image from "next/image";
-import HeroSection from "@/components/home/Hero-section";
-import ContactUs from "@/components/home/contact-us";
-export default function Home() {
-  return (
-    <main className="min-h-screen bg-white text-gray-800">
-      {/* Hero Section */}
-      <HeroSection name={"sda-academy"} name2={"name2"}/>
+'use client'
 
-      {/*   About Section     */}
-      <section className="py-16 px-6 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-semibold text-center mb-8">Why Choose Shaurya Defence Academy?</h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          <div>
-            <p className="text-lg leading-relaxed">
-              At Shaurya Defence Academy, we are committed to providing top-notch coaching for defence aspirants preparing for NDA, CDS, AFCAT, SSB, and other examinations. Located in Pathankot, Punjab, our academy has a proven track record of success, driven by a passionate and experienced faculty.
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { useEffect, useState } from 'react';
+import CourseCard from '@/components/courses/CourseCard';
+import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
+import { featuredCourses, allCourses } from "@/data/courses";
+import Hero from '@/components/Hero';
+import { getHeroSection, getFeatures, getTestimonials } from '@/services/academyService';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
+
+export default function Home() {
+  const [hasMounted, setHasMounted] = useState(false);
+  const [heroData, setHeroData] = useState<any>(null);
+  const [features, setFeatures] = useState<any[]>([]);
+  const [testimonials, setTestimonials] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [hero, feat, test] = await Promise.all([
+          getHeroSection(),
+          getFeatures(),
+          getTestimonials()
+        ]);
+        setHeroData(hero);
+        setFeatures(feat);
+        setTestimonials(test);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) return null;
+
+  return (
+    <main className="min-h-screen bg-gray-50">
+      {heroData && <Hero data={heroData} />}
+      
+      {/* Featured Courses */}
+      <div className="bg-white py-24 sm:py-32">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            className="mx-auto max-w-2xl text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Our Featured Courses
+            </h2>
+            <p className="mt-2 text-lg leading-8 text-gray-800">
+              Comprehensive preparation programs designed to help you succeed in defence examinations.
             </p>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gray-100 p-4 rounded-xl shadow text-center">
-              <h3 className="font-bold text-xl mb-2">Expert Faculty</h3>
-              <p>Trained professionals with defence backgrounds and years of experience.</p>
-            </div>
-            <div className="bg-gray-100 p-4 rounded-xl shadow text-center">
-              <h3 className="font-bold text-xl mb-2">Comprehensive Curriculum</h3>
-              <p>We cover all aspects: academics, physical training, and personality development.</p>
-            </div>
-            <div className="bg-gray-100 p-4 rounded-xl shadow text-center">
-              <h3 className="font-bold text-xl mb-2">SSB Interview Prep</h3>
-              <p>In-depth training for SSB interviews with mock sessions and feedback.</p>
-            </div>
-            <div className="bg-gray-100 p-4 rounded-xl shadow text-center">
-              <h3 className="font-bold text-xl mb-2">Results Oriented</h3>
-              <p>High selection rate in NDA, CDS, and other defence services exams.</p>
-            </div>
-          </div>
+          </motion.div>
+          <motion.div 
+            className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {featuredCourses?.map((course) => {
+              if (!course?.title) return null;
+              return (
+                <motion.div
+                  key={course.title}
+                  variants={itemVariants}
+                >
+                  <CourseCard 
+                    course={course} 
+                    id={course.title.toLowerCase().replace(/\s+/g, '-')} 
+                  />
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
-      </section>
+      </div>
 
       {/* Courses Section */}
-      <section className="py-16 bg-gray-50 px-6">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl font-semibold mb-8">Our Courses</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {['NDA Coaching', 'CDS Coaching', 'SSB Interview Prep', 'AFCAT Coaching', 'Physical Training', 'Spoken English'].map((course) => (
-              <div key={course} className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-                <h3 className="font-bold text-xl mb-2">{course}</h3>
-                <p className="text-gray-600">High-quality content and expert guidance for your success.</p>
-              </div>
-            ))}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="mb-12 text-center text-4xl font-bold text-gray-900">
+            All Courses
+          </h2>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {allCourses?.map((course) => {
+              if (!course?.title) return null;
+              return (
+                <CourseCard 
+                  key={course.title} 
+                  course={course} 
+                  id={course.title.toLowerCase().replace(/\s+/g, '-')} 
+                />
+              );
+            })}
           </div>
         </div>
       </section>
 
+      {/* Features Section */}
+      <div className="bg-white py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">Why Choose Us</h2>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {features?.map((feature) => {
+              if (!feature?.title) return null;
+              return (
+                <div key={feature.title} className="rounded-lg bg-gray-50 p-6 text-center">
+                  <h3 className="mb-2 text-xl font-bold text-gray-900">{feature.title}</h3>
+                  <p className="text-gray-700">{feature.description}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Testimonials Section */}
+      <div className="bg-gray-50 py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">What Our Students Say</h2>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {testimonials?.map((testimonial) => {
+              if (!testimonial?.name) return null;
+              return (
+                <div key={testimonial.name} className="rounded-lg bg-white p-6 shadow-lg">
+                  <p className="mb-4 text-gray-700">{testimonial.content}</p>
+                  <p className="font-bold text-gray-900">{testimonial.name}</p>
+                  <p className="text-gray-600">{testimonial.role}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
       {/* Contact Section */}
-     <ContactUs/>
+      <section className="bg-gray-900 py-16 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="mb-8 text-4xl font-bold">Contact Us</h2>
+          <p className="mb-8 text-xl">
+            Ready to start your journey? Get in touch with us today!
+          </p>
+          <a
+            href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE}`}
+            className="inline-block rounded-full bg-red-600 px-8 py-3 text-lg font-semibold transition-colors hover:bg-red-700"
+          >
+            Call Now
+          </a>
+        </div>
+      </section>
     </main>
   );
 }
-
-

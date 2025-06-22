@@ -1,3 +1,5 @@
+'use client'
+
 export default function ContactUs(){
     return (   <section className="py-16 px-6 max-w-4xl mx-auto">
         <h2 className="text-3xl font-semibold text-center mb-8">Get in Touch</h2>
