@@ -47,7 +47,8 @@ const courseSchema = new mongoose.Schema({
     ref: 'User'
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  collection: 'courses'
 });
 
 const Course = mongoose.model('Course', courseSchema);

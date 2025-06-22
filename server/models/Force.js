@@ -44,7 +44,8 @@ const forceSchema = new mongoose.Schema({
     ref: 'User'
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  collection: 'forces'
 });
 
 const Force = mongoose.model('Force', forceSchema);

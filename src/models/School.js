@@ -42,7 +42,8 @@ const schoolSchema = new mongoose.Schema({
     ref: 'User'
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  collection: 'schools'
 });
 
 const School = mongoose.models.School || mongoose.model('School', schoolSchema);

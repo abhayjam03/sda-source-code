@@ -44,7 +44,7 @@ This will:
 
 ### Admin User
 - **Email**: admin@suryadefenceacademy.com
-- **Password**: password
+- **Password**: Admin@123
 - **Role**: admin
 - **Permissions**: read, write, delete, admin
 

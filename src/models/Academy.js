@@ -32,7 +32,8 @@ const academySchema = new mongoose.Schema({
     ref: 'User'
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  collection: 'academies'
 });
 
 const Academy = mongoose.models.Academy || mongoose.model('Academy', academySchema);

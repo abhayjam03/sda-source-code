@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 
-const MONGODB_URI ='';
+const MONGODB_URI = process.env.NEXT_PUBLIC_MONGODB_URI;
 
 const connectionOptions = {
   maxPoolSize: 10,
@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
   },
   lastLogin: { type: Date },
   isActive: { type: Boolean, default: true }
-}, { timestamps: true });
+}, { timestamps: true, collection: 'users' });
 
 // Academy Schema
 const academySchema = new mongoose.Schema({
@@ -57,7 +57,7 @@ const academySchema = new mongoose.Schema({
   isActive: { type: Boolean, default: true },
   images: [String],
   rating: { type: Number, min: 0, max: 5, default: 0 }
-}, { timestamps: true });
+}, { timestamps: true, collection: 'academies' });
 
 // School Schema
 const schoolSchema = new mongoose.Schema({
@@ -78,7 +78,7 @@ const schoolSchema = new mongoose.Schema({
   establishedYear: Number,
   isActive: { type: Boolean, default: true },
   images: [String]
-}, { timestamps: true });
+}, { timestamps: true, collection: 'schools' });
 
 // Force Schema
 const forceSchema = new mongoose.Schema({
@@ -97,7 +97,7 @@ const forceSchema = new mongoose.Schema({
     physicalStandards: [String],
     medicalStandards: [String]
   }
-}, { timestamps: true });
+}, { timestamps: true, collection: 'forces' });
 
 // Course Schema
 const courseSchema = new mongoose.Schema({
@@ -154,7 +154,7 @@ const courseSchema = new mongoose.Schema({
   brochure: String,
   lastUpdated: { type: Date, default: Date.now },
   updatedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
-}, { timestamps: true });
+}, { timestamps: true, collection: 'courses' });
 
 // Create models
 const User = mongoose.model('User', userSchema);
@@ -185,7 +185,7 @@ async function setupDatabase() {
     console.log('✅ Existing data cleared');
 
     console.log('👤 Creating admin user...');
-    const hashedPassword = await bcrypt.hash('password', 8);
+    const hashedPassword = await bcrypt.hash('Admin@123', 8);
     const adminUser = await User.create({
       username: 'admin',
       email: 'admin@suryadefenceacademy.com',
@@ -767,7 +767,7 @@ async function setupDatabase() {
     console.log(`🎓 Schools: ${await School.countDocuments()} documents`);
     console.log(`🛡️ Forces: ${await Force.countDocuments()} documents`);
     console.log(`📖 Courses: ${await Course.countDocuments()} documents`);
-    console.log('🔑 Admin Login: admin@suryadefenceacademy.com (password: password)');
+    console.log('🔑 Admin Login: admin@suryadefenceacademy.com (password: Admin@123)');
     console.log('✅ Database setup completed successfully!');
     console.log('🌐 Your MongoDB Atlas database is now online and ready to use!');
 

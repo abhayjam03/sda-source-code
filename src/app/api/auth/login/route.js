@@ -99,9 +99,12 @@ export async function POST(request) {
 
     const { email, password } = body;
 
+    console.log('Login attempt for email:', email);
+
     // Connect to database
     try {
       await connectDB();
+      console.log('Database connection successful');
     } catch (dbError) {
       console.error('Database connection error:', dbError);
       return NextResponse.json(
@@ -115,7 +118,21 @@ export async function POST(request) {
     }
 
     // Find user by email
+    console.log('Searching for user with email:', email.toLowerCase());
     const user = await User.findOne({ email: email.toLowerCase() });
+
+    console.log('User found:', user ? 'Yes' : 'No');
+    if (user) {
+      console.log('User details:', {
+        id: user._id,
+        email: user.email,
+        username: user.username,
+        role: user.role,
+        isActive: user.isActive
+      });
+    } else {
+      console.log('No user found with email:', email.toLowerCase());
+    }
 
     if (!user) {
       return NextResponse.json(
