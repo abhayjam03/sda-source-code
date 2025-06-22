@@ -2,6 +2,7 @@
   "name": "sda",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -9,7 +10,9 @@
     "lint": "next lint",
     "init-user": "node src/scripts/initMasterUser.js",
     "populate-db": "node src/scripts/populateDatabase.js",
-    "setup": "node setup.js"
+    "setup": "node setup.js",
+    "setup-db": "node setup-database.js",
+    "test-db": "node test-database.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

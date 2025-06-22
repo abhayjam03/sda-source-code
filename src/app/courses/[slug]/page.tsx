@@ -5,16 +5,31 @@ import { useRouter } from 'next/navigation';
 import { getCourses } from '@/services/academyService';
 import { Course } from '@/types/academy';
 
-export default function CourseDetailPage({ params }: { params: { slug: string } }) {
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export default function CourseDetailPage({ params }: PageProps) {
   const router = useRouter();
   const [hasMounted, setHasMounted] = useState(false);
   const [course, setCourse] = useState<Course | null>(null);
+  const [slug, setSlug] = useState<string>('');
 
   useEffect(() => {
+    const resolveParams = async () => {
+      const resolvedParams = await params;
+      setSlug(resolvedParams.slug);
+    };
+    resolveParams();
+  }, [params]);
+
+  useEffect(() => {
+    if (!slug) return;
+
     const fetchData = async () => {
       try {
         const courses = await getCourses();
-        const foundCourse = courses.find(c => c.title.toLowerCase().replace(/\s+/g, '-') === params.slug);
+        const foundCourse = courses.find(c => c.title.toLowerCase().replace(/\s+/g, '-') === slug);
         if (!foundCourse) {
           router.push('/404');
           return;
@@ -26,7 +41,7 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
     };
     fetchData();
     setHasMounted(true);
-  }, [params.slug, router]);
+  }, [slug, router]);
 
   if (!hasMounted || !course) return null;
 

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const MONGODB_URI = process.env.NEXT_PUBLIC_MONGODB_URI || 'mongodb://localhost:27017/sda';
+const MONGODB_URI = process.env.NEXT_PUBLIC_MONGODB_URI
 
 console.log('🔗 Connecting to MongoDB:', MONGODB_URI);
 
@@ -21,7 +21,7 @@ async function connectDB() {
   }
 
   if (!cached.promise) {
-    const opts = {
+    const opts = {  
       bufferCommands: false,
       maxPoolSize: 10, // Maintain up to 10 socket connections
       serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
