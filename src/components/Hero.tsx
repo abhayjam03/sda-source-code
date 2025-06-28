@@ -4,17 +4,21 @@ import Image from 'next/image';
 import { HeroSection } from '../types/academy';
 
 interface HeroProps {
-  data: HeroSection;
+  data: {
+    title: string
+    subtitle: string
+    description: string
+  }
 }
 
 export default function Hero({ data }: HeroProps) {
   return (
-    <div className="relative h-[600px] w-full overflow-hidden bg-gray-900">
+    <div className="relative h-[600px] w-full overflow-hidden bg-gradient-primary">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-gray-800" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary-900/80 to-primary-800/80" />
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="h-full w-full bg-gradient-to-r from-red-600/20 to-blue-600/20" />
+          <div className="h-full w-full bg-gradient-to-r from-accent-500/20 to-yellow-500/20" />
         </div>
       </div>
 
@@ -30,7 +34,7 @@ export default function Hero({ data }: HeroProps) {
           <p className="mx-auto max-w-2xl text-lg md:text-xl">
             {data.description}
           </p>
-          <button className="mt-8 rounded-full bg-red-600 px-8 py-3 text-lg font-semibold text-white transition-colors hover:bg-red-700">
+          <button className="mt-8 rounded-full bg-accent-500 px-8 py-3 text-lg font-semibold text-gray-900 transition-colors hover:bg-accent-600 shadow-accent">
             Get Started
           </button>
         </div>

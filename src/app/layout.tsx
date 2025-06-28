@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ConditionalLayout from "../components/ConditionalLayout";
+import { ThemeProvider } from "../components/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,11 +20,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ConditionalLayout>
-          {children}
-        </ConditionalLayout>
+        <ThemeProvider>
+          <ConditionalLayout>
+            {children}
+          </ConditionalLayout>
+        </ThemeProvider>
       </body>
     </html>
   );

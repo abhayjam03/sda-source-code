@@ -1,17 +1,14 @@
 'use client'
 
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { useEffect, useState } from 'react';
-import CourseCard from '@/components/courses/CourseCard';
-import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
-import { featuredCourses, allCourses } from "@/data/courses";
-import Hero from '@/components/Hero';
-import { getHeroSection, getFeatures, getTestimonials } from '@/services/academyService';
+import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
+import { getHeroSection, getFeatures, getTestimonials } from '../services/academyService'
+import Hero from '../components/Hero'
+import CourseCard from '../components/CourseCard'
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: {
+  visible: { 
     opacity: 1,
     transition: {
       staggerChildren: 0.1
@@ -24,9 +21,29 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 }
 };
 
+const features = [
+  {
+    title: 'Expert Faculty',
+    description: 'Learn from experienced defence personnel and subject matter experts.',
+  },
+  {
+    title: 'Comprehensive Curriculum',
+    description: 'Well-structured courses covering all aspects of defence examinations.',
+  },
+  {
+    title: 'Personalized Attention',
+    description: 'Small batch sizes ensuring individual attention and guidance.',
+  },
+  {
+    title: 'Success Track Record',
+    description: 'Proven track record of successful placements in defence services.',
+  },
+]
+
 export default function Home() {
-  const [hasMounted, setHasMounted] = useState(false);
   const [heroData, setHeroData] = useState<any>(null);
+  const [featuredCourses, setFeaturedCourses] = useState<any[]>([]);
+  const [allCourses, setAllCourses] = useState<any[]>([]);
   const [features, setFeatures] = useState<any[]>([]);
   const [testimonials, setTestimonials] = useState<any[]>([]);
 
@@ -36,7 +53,7 @@ export default function Home() {
         const [hero, feat, test] = await Promise.all([
           getHeroSection(),
           getFeatures(),
-          getTestimonials()
+          getTestimonials(),
         ]);
         setHeroData(hero);
         setFeatures(feat);
@@ -46,17 +63,14 @@ export default function Home() {
       }
     };
     fetchData();
-    setHasMounted(true);
   }, []);
 
-  if (!hasMounted) return null;
-
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-background">
       {heroData && <Hero data={heroData} />}
-      
+
       {/* Featured Courses */}
-      <div className="bg-white py-24 sm:py-32">
+      <div className="bg-background py-24 sm:py-32">
         <div className="container mx-auto px-4">
           <motion.div 
             className="mx-auto max-w-2xl text-center"
@@ -65,10 +79,10 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               Our Featured Courses
             </h2>
-            <p className="mt-2 text-lg leading-8 text-gray-800">
+            <p className="mt-2 text-lg leading-8 text-foreground-secondary">
               Comprehensive preparation programs designed to help you succeed in defence examinations.
             </p>
           </motion.div>
@@ -86,10 +100,7 @@ export default function Home() {
                   key={course.title}
                   variants={itemVariants}
                 >
-                  <CourseCard 
-                    course={course} 
-                    id={course.title.toLowerCase().replace(/\s+/g, '-')} 
-                  />
+                  <CourseCard course={course} />
                 </motion.div>
               );
             })}
@@ -98,9 +109,9 @@ export default function Home() {
       </div>
 
       {/* Courses Section */}
-      <section className="py-16">
+      <section className="bg-background-secondary py-16">
         <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-4xl font-bold text-gray-900">
+          <h2 className="mb-12 text-center text-4xl font-bold text-foreground">
             All Courses
           </h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -110,7 +121,6 @@ export default function Home() {
                 <CourseCard 
                   key={course.title} 
                   course={course} 
-                  id={course.title.toLowerCase().replace(/\s+/g, '-')} 
                 />
               );
             })}
@@ -119,16 +129,16 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <div className="bg-white py-16">
+      <div className="bg-background py-16">
         <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">Why Choose Us</h2>
+          <h2 className="mb-12 text-center text-3xl font-bold text-foreground">Why Choose Us</h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {features?.map((feature) => {
               if (!feature?.title) return null;
               return (
-                <div key={feature.title} className="rounded-lg bg-gray-50 p-6 text-center">
-                  <h3 className="mb-2 text-xl font-bold text-gray-900">{feature.title}</h3>
-                  <p className="text-gray-700">{feature.description}</p>
+                <div key={feature.title} className="rounded-lg bg-background-tertiary p-6 text-center border border-border">
+                  <h3 className="mb-2 text-xl font-bold text-foreground">{feature.title}</h3>
+                  <p className="text-foreground-secondary">{feature.description}</p>
                 </div>
               );
             })}
@@ -137,17 +147,17 @@ export default function Home() {
       </div>
 
       {/* Testimonials Section */}
-      <div className="bg-gray-50 py-16">
+      <div className="bg-background-secondary py-16">
         <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">What Our Students Say</h2>
+          <h2 className="mb-12 text-center text-3xl font-bold text-foreground">What Our Students Say</h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {testimonials?.map((testimonial) => {
               if (!testimonial?.name) return null;
               return (
-                <div key={testimonial.name} className="rounded-lg bg-white p-6 shadow-lg">
-                  <p className="mb-4 text-gray-700">{testimonial.content}</p>
-                  <p className="font-bold text-gray-900">{testimonial.name}</p>
-                  <p className="text-gray-600">{testimonial.role}</p>
+                <div key={testimonial.name} className="rounded-lg bg-background p-6 shadow-brand border border-border">
+                  <p className="mb-4 text-foreground-secondary">{testimonial.content}</p>
+                  <p className="font-bold text-foreground">{testimonial.name}</p>
+                  <p className="text-foreground-tertiary">{testimonial.role}</p>
                 </div>
               );
             })}
@@ -156,7 +166,7 @@ export default function Home() {
       </div>
 
       {/* Contact Section */}
-      <section className="bg-gray-900 py-16 text-white">
+      <section className="bg-gradient-primary py-16 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="mb-8 text-4xl font-bold">Contact Us</h2>
           <p className="mb-8 text-xl">
@@ -164,7 +174,7 @@ export default function Home() {
           </p>
           <a
             href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE}`}
-            className="inline-block rounded-full bg-red-600 px-8 py-3 text-lg font-semibold transition-colors hover:bg-red-700"
+            className="inline-block rounded-full bg-accent-500 px-8 py-3 text-lg font-semibold text-gray-900 transition-colors hover:bg-accent-600 shadow-accent"
           >
             Call Now
           </a>

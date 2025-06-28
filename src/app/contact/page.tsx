@@ -44,9 +44,9 @@ export default function ContactPage() {
   if (!hasMounted || !academyInfo) return null;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <div className="bg-red-600 py-16 text-white">
+      <div className="bg-gradient-primary py-16 text-white">
         <div className="container mx-auto px-4 text-center">
           <h1 className="mb-4 text-4xl font-bold md:text-5xl">Contact Us</h1>
           <p className="mx-auto max-w-2xl text-lg">Get in touch with us for any inquiries or to schedule a visit.</p>
@@ -56,31 +56,53 @@ export default function ContactPage() {
       {/* Contact Information Section */}
       <div className="container mx-auto px-4 py-16">
         <div className="mx-auto max-w-3xl">
-          <h2 className="mb-6 text-3xl font-bold text-gray-900">Contact Information</h2>
-          <p className="mb-2 text-lg text-gray-700"><strong>Phone:</strong> {academyInfo.contact.phone}</p>
-          <p className="mb-2 text-lg text-gray-700"><strong>Email:</strong> {academyInfo.contact.email}</p>
-          <p className="mb-2 text-lg text-gray-700"><strong>Address:</strong> {academyInfo.contact.address}</p>
+          <h2 className="mb-6 text-3xl font-bold text-foreground">Contact Information</h2>
+          <div className="space-y-4 text-lg text-foreground-secondary">
+            <p><strong className="text-foreground">Phone:</strong> {academyInfo.contact.phone}</p>
+            <p><strong className="text-foreground">Email:</strong> {academyInfo.contact.email}</p>
+            <p><strong className="text-foreground">Address:</strong> {academyInfo.contact.address}</p>
+          </div>
         </div>
       </div>
 
       {/* Contact Form Section */}
-      <div className="bg-white py-16">
+      <div className="bg-background-secondary py-16">
         <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">Send Us a Message</h2>
-          <form className="mx-auto max-w-md">
-            <div className="mb-4">
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-              <input type="text" id="name" name="name" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500" />
+          <h2 className="mb-12 text-center text-3xl font-bold text-foreground">Send Us a Message</h2>
+          <form className="mx-auto max-w-md space-y-6">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-foreground">Name</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                className="mt-1 block w-full rounded-md border border-border bg-background px-3 py-2 text-foreground shadow-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" 
+              />
             </div>
-            <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-              <input type="email" id="email" name="email" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500" />
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-foreground">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                className="mt-1 block w-full rounded-md border border-border bg-background px-3 py-2 text-foreground shadow-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" 
+              />
             </div>
-            <div className="mb-4">
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
-              <textarea id="message" name="message" rows={4} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"></textarea>
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium text-foreground">Message</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows={4} 
+                className="mt-1 block w-full rounded-md border border-border bg-background px-3 py-2 text-foreground shadow-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+              ></textarea>
             </div>
-            <button type="submit" className="w-full rounded-md bg-red-600 py-2 text-white hover:bg-red-700">Send Message</button>
+            <button 
+              type="submit" 
+              className="w-full rounded-md bg-primary-600 py-2 text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors"
+            >
+              Send Message
+            </button>
           </form>
         </div>
       </div>
@@ -97,6 +119,26 @@ export default function ContactPage() {
                 <p className="text-gray-600">{testimonial.role}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Map Section */}
+      <div className="bg-background py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="mb-8 text-center text-3xl font-bold text-foreground">Find Us</h2>
+          <div className="mx-auto max-w-4xl">
+            <div className="aspect-w-16 aspect-h-9 rounded-lg bg-background-tertiary border border-border">
+              <div className="flex items-center justify-center h-64">
+                <div className="text-center">
+                  <svg className="mx-auto h-12 w-12 text-foreground-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <p className="mt-2 text-foreground-secondary">Map placeholder - Pathankot, Punjab</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

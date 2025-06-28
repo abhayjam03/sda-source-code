@@ -6,62 +6,47 @@ import { Suspense } from 'react'
 
 function NotFoundContent() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-50 flex items-center justify-center p-4">
-      <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl p-8">
+    <div className="min-h-screen bg-gradient-to-b from-background-secondary to-background flex items-center justify-center p-4">
+      <div className="max-w-2xl w-full bg-background rounded-2xl shadow-brand-lg p-8 border border-border">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2 }}
           className="text-center"
         >
-          <motion.div
-            initial={{ y: -20 }}
-            animate={{ y: 0 }}
-            transition={{ type: "spring", stiffness: 100 }}
-          >
-            <h1 className="text-4xl font-bold text-indigo-900 mb-4">
-              404 - Page Not Found
-            </h1>
-            <p className="text-gray-800 mb-8">
-              The page you're looking for seems to have gone on a secret mission.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ rotate: 0 }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            className="w-32 h-32 mx-auto mb-8"
-          >
+          <div className="mb-8">
             <svg
-              viewBox="0 0 100 100"
+              className="mx-auto h-24 w-24 text-primary-500"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-full h-full text-indigo-500"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
               <path
-                d="M50 0C22.4 0 0 22.4 0 50s22.4 50 50 50 50-22.4 50-50S77.6 0 50 0zm0 90c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40z"
-                fill="currentColor"
-              />
-              <path
-                d="M50 20c-16.6 0-30 13.4-30 30s13.4 30 30 30 30-13.4 30-30-13.4-30-30-30zm0 50c-11 0-20-9-20-20s9-20 20-20 20 9 20 20-9 20-20 20z"
-                fill="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.47-.881-6.08-2.33"
               />
             </svg>
-          </motion.div>
-
+          </div>
+          <h1 className="text-4xl font-bold text-foreground mb-4">
+            404 - Page Not Found
+          </h1>
+          <p className="text-foreground-secondary mb-8">
+            The page you're looking for seems to have gone on a secret mission.
+          </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/"
-              className="btn bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg transition-colors"
+              className="inline-flex items-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
             >
-              Return Home
+              Go Home
             </Link>
             <Link
-              href="/courses"
-              className="btn bg-gray-100 hover:bg-gray-200 text-gray-800 px-6 py-3 rounded-lg transition-colors"
+              href="/contact"
+              className="inline-flex items-center px-6 py-3 bg-background-tertiary hover:bg-background-secondary text-foreground rounded-lg transition-colors border border-border focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
             >
-              Explore Courses
+              Contact Us
             </Link>
           </div>
         </motion.div>
@@ -73,13 +58,13 @@ function NotFoundContent() {
 export default function NotFound() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-50 flex items-center justify-center p-4">
-        <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl p-8">
+      <div className="min-h-screen bg-gradient-to-b from-background-secondary to-background flex items-center justify-center p-4">
+        <div className="max-w-2xl w-full bg-background rounded-2xl shadow-brand-lg p-8 border border-border">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-indigo-900 mb-4">
+            <h1 className="text-4xl font-bold text-foreground mb-4">
               404 - Page Not Found
             </h1>
-            <p className="text-gray-800 mb-8">
+            <p className="text-foreground-secondary mb-8">
               The page you're looking for seems to have gone on a secret mission.
             </p>
           </div>
