@@ -1,4 +1,4 @@
-import { getAcademyInfo, getTestimonials } from '../../services/academyService';
+import { getAcademyInfo, getTestimonials } from '../../services/mock';
 
 export default async function AdmissionPage() {
   const [academyInfo, testimonials] = await Promise.all([

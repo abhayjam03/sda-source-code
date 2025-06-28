@@ -1,5 +1,9 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config({ path: '.env.local' });
 
 const MONGODB_URI = process.env.NEXT_PUBLIC_MONGODB_URI;
 
@@ -491,6 +495,7 @@ async function setupDatabase() {
         isFeatured: true,
         images: ["/images/courses/nda-foundation1.jpg", "/images/courses/nda-foundation2.jpg"],
         brochure: "/brochures/nda-foundation.pdf",
+        lastUpdated: new Date(),
         updatedBy: adminUser._id
       },
       {
@@ -549,6 +554,7 @@ async function setupDatabase() {
         isPopular: true,
         images: ["/images/courses/cds-ota1.jpg", "/images/courses/cds-ota2.jpg"],
         brochure: "/brochures/cds-ota.pdf",
+        lastUpdated: new Date(),
         updatedBy: adminUser._id
       },
       {
@@ -607,6 +613,7 @@ async function setupDatabase() {
         isPopular: true,
         images: ["/images/courses/afcat1.jpg", "/images/courses/afcat2.jpg"],
         brochure: "/brochures/afcat.pdf",
+        lastUpdated: new Date(),
         updatedBy: adminUser._id
       },
       {
@@ -651,6 +658,7 @@ async function setupDatabase() {
         isPopular: false,
         images: ["/images/courses/crpf1.jpg", "/images/courses/crpf2.jpg"],
         brochure: "/brochures/crpf-constable.pdf",
+        lastUpdated: new Date(),
         updatedBy: adminUser._id
       },
       {
@@ -695,6 +703,7 @@ async function setupDatabase() {
         isPopular: false,
         images: ["/images/courses/delhi-police1.jpg", "/images/courses/delhi-police2.jpg"],
         brochure: "/brochures/delhi-police.pdf",
+        lastUpdated: new Date(),
         updatedBy: adminUser._id
       },
       {
@@ -739,6 +748,7 @@ async function setupDatabase() {
         isPopular: true,
         images: ["/images/courses/ssc-gd1.jpg", "/images/courses/ssc-gd2.jpg"],
         brochure: "/brochures/ssc-gd.pdf",
+        lastUpdated: new Date(),
         updatedBy: adminUser._id
       }
     ]);

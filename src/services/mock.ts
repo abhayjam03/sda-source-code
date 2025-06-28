@@ -90,3 +90,8 @@ export const getCourses = async (): Promise<Course[]> => {
   await new Promise(resolve => setTimeout(resolve, 500));
   return mockAcademyInfo.courses;
 }; 
+
+export const getFetauredCourses = async (): Promise<Course[]> => {
+  await new Promise(resolve => setTimeout(resolve, 500));
+  return mockAcademyInfo.courses;
+};

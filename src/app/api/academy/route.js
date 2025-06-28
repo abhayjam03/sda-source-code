@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Academy from '@/models/Academy';
+import User from '@/models/User';
 
 // GET - Fetch academy information
 export async function GET() {

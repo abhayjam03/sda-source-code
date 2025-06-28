@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Course from '@/models/Course';
+import User from '@/models/User';
 
 // GET - Fetch single course
 export async function GET(request, { params }) {

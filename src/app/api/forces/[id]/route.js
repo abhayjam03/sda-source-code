@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Force from '@/models/Force';
+import User from '@/models/User';
 
 // GET - Fetch single force
 export async function GET(request, { params }) {

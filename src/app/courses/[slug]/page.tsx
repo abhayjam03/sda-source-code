@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getCourses } from '@/services/academyService';
+import { getCourses } from '@/services/mock';
 import { Course } from '@/types/academy';
 
 interface PageProps {

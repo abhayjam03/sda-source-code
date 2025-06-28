@@ -1,13 +1,15 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import School from '@/models/School';
+import User from '@/models/User';
 
 // GET - Fetch all schools
 export async function GET() {
   try {
     await connectDB();
     const schools = await School.find().populate('updatedBy', 'username email').sort({ createdAt: -1 });
-    return NextResponse.json(schools);
+    // Return empty array if no schools found
+    return NextResponse.json(schools || []);
   } catch (error) {
     console.error('Error fetching schools:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

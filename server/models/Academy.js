@@ -1,40 +1,31 @@
 const mongoose = require('mongoose');
 
 const academySchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
+  name: { type: String, required: true },
+  code: { type: String, required: true, unique: true },
+  description: String,
   location: {
-    type: String,
-    required: true
+    address: String,
+    city: String,
+    state: String,
+    pincode: String,
+    coordinates: {
+      latitude: Number,
+      longitude: Number
+    }
   },
   contact: {
-    type: String,
-    required: true
+    phone: String,
+    email: String,
+    website: String
   },
-  overview: {
-    type: String,
-    required: true
-  },
-  features: [{
-    type: String
-  }],
-  specialConcessions: [{
-    type: String
-  }],
-  lastUpdated: {
-    type: Date,
-    default: Date.now
-  },
-  updatedBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }
-}, {
-  timestamps: true,
-  collection: 'academies'
-});
+  facilities: [String],
+  capacity: Number,
+  establishedYear: Number,
+  isActive: { type: Boolean, default: true },
+  images: [String],
+  rating: { type: Number, min: 0, max: 5, default: 0 }
+}, { timestamps: true, collection: 'academies' });
 
 const Academy = mongoose.model('Academy', academySchema);
 

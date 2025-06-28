@@ -1,13 +1,15 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Force from '@/models/Force';
+import User from '@/models/User';
 
 // GET - Fetch all forces
 export async function GET() {
   try {
     await connectDB();
     const forces = await Force.find().populate('updatedBy', 'username email').sort({ createdAt: -1 });
-    return NextResponse.json(forces);
+    // Return empty array if no forces found
+    return NextResponse.json(forces || []);
   } catch (error) {
     console.error('Error fetching forces:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

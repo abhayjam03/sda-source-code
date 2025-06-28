@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from 'react';
 import CourseCard from "@/components/courses/CourseCard";
-import { getCourses, getFeatures, getTestimonials } from '@/services/academyService';
+import { getCourses, getFeatures, getTestimonials } from '@/services/mock';
 
 const containerVariants = {
   hidden: { opacity: 0 },

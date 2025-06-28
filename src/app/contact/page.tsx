@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { EnvelopeIcon, PhoneIcon, MapPinIcon } from '@heroicons/react/24/outline';
-import { getAcademyInfo, getTestimonials } from '@/services/academyService';
+import { getAcademyInfo, getTestimonials } from '@/services/mock';
 
 const contactInfo = [
   {

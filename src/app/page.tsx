@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { getHeroSection, getFeatures, getTestimonials } from '../services/academyService'
+import { getCourses, getHeroSection, getFeatures, getFeaturedCourses, getTestimonials} from '../services/academyServices'
 import Hero from '../components/Hero'
 import CourseCard from '../components/CourseCard'
 
@@ -21,24 +21,6 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 }
 };
 
-const features = [
-  {
-    title: 'Expert Faculty',
-    description: 'Learn from experienced defence personnel and subject matter experts.',
-  },
-  {
-    title: 'Comprehensive Curriculum',
-    description: 'Well-structured courses covering all aspects of defence examinations.',
-  },
-  {
-    title: 'Personalized Attention',
-    description: 'Small batch sizes ensuring individual attention and guidance.',
-  },
-  {
-    title: 'Success Track Record',
-    description: 'Proven track record of successful placements in defence services.',
-  },
-]
 
 export default function Home() {
   const [heroData, setHeroData] = useState<any>(null);
@@ -50,13 +32,24 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [hero, feat, test] = await Promise.all([
+        const results = await Promise.allSettled([
           getHeroSection(),
           getFeatures(),
+          getCourses(),
+          getFeaturedCourses(),
           getTestimonials(),
         ]);
+        
+        // Extract data from successful promises
+        const [hero, feat, courses, featuredCourses, test] = results.map(result => 
+          result.status === 'fulfilled' ? result.value : null
+        );
+        
         setHeroData(hero);
         setFeatures(feat);
+        console.log(courses);
+        courses?.length > 0 && setAllCourses(courses);
+        setFeaturedCourses(featuredCourses);
         setTestimonials(test);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -86,7 +79,7 @@ export default function Home() {
               Comprehensive preparation programs designed to help you succeed in defence examinations.
             </p>
           </motion.div>
-          <motion.div 
+          {featuredCourses?.length > 0 && <motion.div 
             className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3"
             variants={containerVariants}
             initial="hidden"
@@ -104,32 +97,31 @@ export default function Home() {
                 </motion.div>
               );
             })}
-          </motion.div>
+          </motion.div>}
         </div>
       </div>
 
       {/* Courses Section */}
-      <section className="bg-background-secondary py-16">
+      {allCourses?.length > 0 && <section className="bg-background-secondary py-16">
         <div className="container mx-auto px-4">
           <h2 className="mb-12 text-center text-4xl font-bold text-foreground">
             All Courses
           </h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {allCourses?.map((course) => {
-              if (!course?.title) return null;
+              if (!course?.name) return null;
               return (
                 <CourseCard 
-                  key={course.title} 
+                  key={course.name} 
                   course={course} 
                 />
               );
             })}
           </div>
         </div>
-      </section>
-
+      </section>}
       {/* Features Section */}
-      <div className="bg-background py-16">
+      {features?.length > 0 && <div className="bg-background py-16">
         <div className="container mx-auto px-4">
           <h2 className="mb-12 text-center text-3xl font-bold text-foreground">Why Choose Us</h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
@@ -144,10 +136,10 @@ export default function Home() {
             })}
           </div>
         </div>
-      </div>
+      </div>}
 
       {/* Testimonials Section */}
-      <div className="bg-background-secondary py-16">
+      {testimonials?.length > 0 && <div className="bg-background-secondary py-16">
         <div className="container mx-auto px-4">
           <h2 className="mb-12 text-center text-3xl font-bold text-foreground">What Our Students Say</h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -163,7 +155,7 @@ export default function Home() {
             })}
           </div>
         </div>
-      </div>
+      </div>}
 
       {/* Contact Section */}
       <section className="bg-gradient-primary py-16 text-white">

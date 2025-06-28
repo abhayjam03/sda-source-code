@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import User from '@/models/User';
 
 const MONGODB_URI = process.env.NEXT_PUBLIC_MONGODB_URI
 
@@ -16,6 +17,7 @@ if (!cached) {
 }
 
 async function connectDB() {
+  console.log("connectDB");
   if (cached.conn) {
     return cached.conn;
   }

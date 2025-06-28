@@ -1,50 +1,24 @@
 import mongoose from 'mongoose';
 
 const schoolSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
+  name: { type: String, required: true },
+  type: { type: String, enum: ['Army', 'Navy', 'Air Force', 'Paramilitary', 'Police'], required: true },
+  description: String,
+  location: {
+    address: String,
+    city: String,
+    state: String,
+    pincode: String
   },
-  type: {
-    type: String,
-    enum: ['Military School', 'Sainik School'],
-    required: true
+  contact: {
+    phone: String,
+    email: String,
+    website: String
   },
-  description: {
-    type: String,
-    required: true
-  },
-  examPatterns: [{
-    class: {
-      type: Number,
-      required: true
-    },
-    mode: String,
-    duration: Number,
-    totalQuestions: Number,
-    totalMarks: Number,
-    subjects: [{
-      name: String,
-      questions: Number,
-      marks: Number
-    }],
-    markingScheme: {
-      correct: Number,
-      incorrect: Number
-    }
-  }],
-  lastUpdated: {
-    type: Date,
-    default: Date.now
-  },
-  updatedBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }
-}, {
-  timestamps: true,
-  collection: 'schools'
-});
+  establishedYear: Number,
+  isActive: { type: Boolean, default: true },
+  images: [String]
+}, { timestamps: true, collection: 'schools' });
 
 const School = mongoose.models.School || mongoose.model('School', schoolSchema);
 

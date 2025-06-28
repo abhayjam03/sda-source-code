@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react';
-import { getAcademyInfo } from '@/services/academyService';
+import { getAcademyInfo } from '@/services/mock';
 
 const features = [
   {
